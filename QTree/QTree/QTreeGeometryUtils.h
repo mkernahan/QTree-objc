@@ -3,8 +3,7 @@
 // file 'LICENSE.md', which is part of this source code package.
 //
 
-@import CoreLocation;
-@import MapKit;
+#import <MapKit/MapKit.h>
 
 BOOL MKCoordinateRegionIntersectsRegion(MKCoordinateRegion region1, MKCoordinateRegion region2);
 BOOL MKCoordinateRegionContainsCoordinate(MKCoordinateRegion region, CLLocationCoordinate2D coordinate);

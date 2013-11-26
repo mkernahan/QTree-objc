@@ -3,7 +3,7 @@
 // file 'LICENSE.md', which is part of this source code package.
 //
 
-@import CoreLocation;
+#import <CoreLocation/CoreLocation.h>
 
 @protocol QTreeInsertable<NSObject>
 

@@ -3,10 +3,8 @@
 // file 'LICENSE.md', which is part of this source code package.
 //
 
-@import CoreLocation;
-@import MapKit;
-
 #import "QCluster.h"
+#import <MapKit/MapKit.h>
 
 @interface QNode : NSObject
 

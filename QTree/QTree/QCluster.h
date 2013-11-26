@@ -3,8 +3,6 @@
 // file 'LICENSE.md', which is part of this source code package.
 //
 
-@import CoreLocation;
-
 #import "QTreeInsertable.h"
 
 @interface QCluster : NSObject

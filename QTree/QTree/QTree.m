@@ -18,20 +18,20 @@
 {
 	self = [super init];
 	if( !self ) {
-    return nil;
-  }
+        return nil;
+    }
 	self.rootNode = [[QNode alloc] initWithRegion:MKCoordinateRegionForMapRect(MKMapRectWorld)];
 	return self;
 }
 
 -(void)insertObject:(id<QTreeInsertable>)insertableObject
 {
-  [self.rootNode insertObject:insertableObject];
+    [self.rootNode insertObject:insertableObject];
 }
 
 -(NSUInteger)count
 {
-  return self.rootNode.count;
+    return self.rootNode.count;
 }
 
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span
