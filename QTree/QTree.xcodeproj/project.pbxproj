@@ -40,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4CC784C21846409D006A289F /* QTreeFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTreeFilterController.h; sourceTree = "<group>"; };
 		5393622818258B2F00A0DFEE /* libQTree.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQTree.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5393622F18258B2F00A0DFEE /* QTree-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QTree-Prefix.pch"; sourceTree = "<group>"; };
 		5393623818258B2F00A0DFEE /* QTreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QTreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +109,7 @@
 				5393625718258B7600A0DFEE /* QTreeGeometryUtils.h */,
 				5393625818258B7600A0DFEE /* QTreeGeometryUtils.m */,
 				5393625918258B7600A0DFEE /* QTreeInsertable.h */,
+				4CC784C21846409D006A289F /* QTreeFilterController.h */,
 				5393622E18258B2F00A0DFEE /* Supporting Files */,
 			);
 			path = QTree;
