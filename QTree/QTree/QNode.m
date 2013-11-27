@@ -188,17 +188,21 @@ static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, 
         [result addObjectsFromArray:[self.downRight getObjectsInRegion:region minNonClusteredSpan:span]];
     } else {
         if( !self.cachedCluster ) {
-            QCluster* cluster = [[QCluster alloc] init];
             
             NSArray* allChildren = [self getObjectsInRegion:self.region minNonClusteredSpan:0];
-            CLLocationCoordinate2D meanCenter = MeanCoordinate(allChildren);
-            cluster.coordinate = meanCenter;
-            cluster.objectsCount = allChildren.count;
-            cluster.radius = CircumscribedDegreesRadius(allChildren, meanCenter);
-            
-            self.cachedCluster = cluster;
+            if (allChildren && allChildren.count > 0) {
+                QCluster *cluster = [_filterController newQClusterObject];
+                CLLocationCoordinate2D meanCenter = MeanCoordinate(allChildren);
+                cluster.coordinate = meanCenter;
+                cluster.objectsCount = allChildren.count;
+                cluster.radius = CircumscribedDegreesRadius(allChildren, meanCenter);
+                self.cachedCluster = cluster;
+
+            }
         }
-        [result addObject:self.cachedCluster];
+        if (_cachedCluster) {
+            [result addObject:_cachedCluster];
+        }
     }
     return result;
 }

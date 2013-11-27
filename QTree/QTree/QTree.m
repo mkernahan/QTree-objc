@@ -50,4 +50,8 @@
     return sourceArray;
 }
 
+- (QCluster *) newQClusterObject {
+    return [[QCluster alloc] init];
+}
+
 @end
