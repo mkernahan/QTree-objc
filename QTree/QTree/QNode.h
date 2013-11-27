@@ -4,20 +4,22 @@
 //
 
 #import "QCluster.h"
+#import "QTreeFilterController.h"
 #import <MapKit/MapKit.h>
 
 @interface QNode : NSObject
 
-+(instancetype)nodeWithRegion:(MKCoordinateRegion)region;
++(instancetype)nodeWithRegion:(MKCoordinateRegion)region filterController:(id<QTreeFilterController>)filterController;
 
-
--(instancetype)initWithRegion:(MKCoordinateRegion)region;
+-(instancetype)initWithRegion:(MKCoordinateRegion)region filterController:(id<QTreeFilterController>)filterController;
 
 @property(nonatomic, readonly) MKCoordinateRegion region;
 @property(nonatomic, readonly) NSUInteger count;
 // Shortcuts
 @property(nonatomic, readonly) CLLocationDegrees centerLatitude;
 @property(nonatomic, readonly) CLLocationDegrees centerLongitude;
+
+@property(nonatomic, readonly) id<QTreeFilterController> filterController;
 
 -(BOOL)insertObject:(id<QTreeInsertable>)insertableObject;
 

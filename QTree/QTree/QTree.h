@@ -4,13 +4,16 @@
 //
 
 #import "QTreeInsertable.h"
+#import "QTreeFilterController.h"
 #import <MapKit/MapKit.h>
 
-@interface QTree : NSObject
-
--(void)insertObject:(id<QTreeInsertable>)insertableObject;
+@interface QTree : NSObject <QTreeFilterController>
 
 @property(nonatomic, readonly) NSUInteger count;
+
+-(id)initWithFilterController:(id<QTreeFilterController>)filterController;
+
+-(void)insertObject:(id<QTreeInsertable>)insertableObject;
 
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span;
 // Returned array is sorted from the least to the most distant

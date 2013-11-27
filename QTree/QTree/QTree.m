@@ -14,13 +14,13 @@
 
 @implementation QTree
 
--(id)init
+-(id)init { return [self initWithFilterController:self]; }
+-(id)initWithFilterController:(id<QTreeFilterController>)filterController
 {
-	self = [super init];
-	if( !self ) {
+	if(!(self = [super init])) {
         return nil;
     }
-	self.rootNode = [[QNode alloc] initWithRegion:MKCoordinateRegionForMapRect(MKMapRectWorld)];
+	_rootNode = [[QNode alloc] initWithRegion:MKCoordinateRegionForMapRect(MKMapRectWorld) filterController:filterController];
 	return self;
 }
 
@@ -42,6 +42,12 @@
 -(NSArray*)neighboursForLocation:(CLLocationCoordinate2D)location limitCount:(NSUInteger)limit
 {
 	return [self.rootNode neighboursForLocation:location limitCount:limit];
+}
+
+#pragma mark - QTreeFilterController implementation
+
+- (NSArray *) applyFilterToArrayOfInsertableObjects:(NSArray *)sourceArray {
+    return sourceArray;
 }
 
 @end

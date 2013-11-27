@@ -4,6 +4,7 @@
 //
 
 #import "QNode.h"
+#import "QTree.h"
 #import "QTreeGeometryUtils.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -52,23 +53,25 @@ static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, 
 @property(nonatomic, retain) QNode* downLeft;
 @property(nonatomic, retain) QNode* downRight;
 
+@property(nonatomic, assign) id<QTreeFilterController> filterController;
 @end
 
 @implementation QNode
 
-+(instancetype)nodeWithRegion:(MKCoordinateRegion)region
++(instancetype)nodeWithRegion:(MKCoordinateRegion)region filterController:(id<QTreeFilterController>)filterController
 {
-    return [[QNode alloc] initWithRegion:region];
+    return [[QNode alloc] initWithRegion:region filterController:filterController];
 }
 
 
--(id)initWithRegion:(MKCoordinateRegion)region
+-(id)initWithRegion:(MKCoordinateRegion)region filterController:(id<QTreeFilterController>)filterController
 {
     self = [super init];
     if( !self ) {
         return nil;
     }
-    self.region = region;
+    _region = region;
+    _filterController = filterController;
     return self;
 }
 
@@ -152,7 +155,7 @@ static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, 
         const CLLocationCoordinate2D newCenter = CLLocationCoordinate2DMake(newLat, newLng);
         const MKCoordinateSpan newSpan = MKCoordinateSpanMake(latDeltaBy2, lngDeltaBy2);
         
-        QNode* newNode = [QNode nodeWithRegion:MKCoordinateRegionMake(newCenter, newSpan)];
+        QNode* newNode = [QNode nodeWithRegion:MKCoordinateRegionMake(newCenter, newSpan) filterController:_filterController];
         newNode.leadObject = leadObject;
         newNode.satellites = [satellites mutableCopy];
         newNode.count = 1 + satellites.count;
@@ -176,7 +179,7 @@ static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, 
         if( MKCoordinateRegionContainsCoordinate(region, self.leadObject.coordinate) ) {
             [result addObject:self.leadObject];
             [result addObjectsFromArray:self.satellites.allObjects];
-            
+            return (_filterController ? [_filterController applyFilterToArrayOfInsertableObjects:result] : result);
         }
     } else if( MIN(self.region.span.latitudeDelta, self.region.span.longitudeDelta) >= span ) {
         [result addObjectsFromArray:[self.upLeft getObjectsInRegion:region minNonClusteredSpan:span]];
