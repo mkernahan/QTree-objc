@@ -50,8 +50,8 @@
     return sourceArray;
 }
 
-- (QCluster *) newQClusterObject {
-    return [[QCluster alloc] init];
+- (QCluster *) newQClusterObjectWithChildren:(NSArray *)children {
+    return [[QCluster alloc] initWithChildren:children];
 }
 
 @end

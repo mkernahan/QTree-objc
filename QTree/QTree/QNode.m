@@ -10,33 +10,6 @@
 
 static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
 
-static CLLocationDegrees DegreesMetric(CLLocationCoordinate2D c1, CLLocationCoordinate2D c2)
-{
-    return sqrt(pow(c1.latitude - c2.latitude, 2) + pow(c1.longitude - c2.longitude, 2));
-}
-
-static CLLocationCoordinate2D MeanCoordinate(NSArray* insertableObjects)
-{
-    CLLocationDegrees meanLatitude = 0;
-    CLLocationDegrees meanLongitude = 0;
-    for( id<QTreeInsertable> object in insertableObjects ) {
-        meanLongitude += object.coordinate.longitude;
-        meanLatitude += object.coordinate.latitude;
-    }
-    meanLatitude /= insertableObjects.count;
-    meanLongitude /= insertableObjects.count;
-    return CLLocationCoordinate2DMake(meanLatitude, meanLongitude);
-}
-
-static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, CLLocationCoordinate2D center)
-{
-    CLLocationDegrees radius = 0;
-    for( id<QTreeInsertable> object in insertableObjects ) {
-        radius = MAX(radius, DegreesMetric(object.coordinate, center));
-    }
-    return radius;
-}
-
 @interface QNode()
 
 @property(nonatomic, assign) MKCoordinateRegion region;
@@ -191,13 +164,7 @@ static CLLocationDegrees CircumscribedDegreesRadius(NSArray* insertableObjects, 
             
             NSArray* allChildren = [self getObjectsInRegion:self.region minNonClusteredSpan:0];
             if (allChildren && allChildren.count > 0) {
-                QCluster *cluster = [_filterController newQClusterObject];
-                CLLocationCoordinate2D meanCenter = MeanCoordinate(allChildren);
-                cluster.coordinate = meanCenter;
-                cluster.objectsCount = allChildren.count;
-                cluster.radius = CircumscribedDegreesRadius(allChildren, meanCenter);
-                self.cachedCluster = cluster;
-
+                self.cachedCluster = [_filterController newQClusterObjectWithChildren:allChildren];
             }
         }
         if (_cachedCluster) {

@@ -11,4 +11,6 @@
 @property(nonatomic, assign) NSInteger objectsCount;
 @property(nonatomic, assign) CLLocationDegrees radius;
 
+- (id) initWithChildren:(NSArray *)allChildren;
+
 @end

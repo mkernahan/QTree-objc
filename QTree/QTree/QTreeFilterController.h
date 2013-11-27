@@ -7,6 +7,6 @@
 @protocol QTreeFilterController <NSObject>
 // Hook for filtering the results
 - (NSArray *) applyFilterToArrayOfInsertableObjects:(NSArray *)sourceArray;
-- (QCluster *) newQClusterObject;
+- (QCluster *) newQClusterObjectWithChildren:(NSArray *)children;
 
 @end
