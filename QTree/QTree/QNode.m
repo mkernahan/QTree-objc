@@ -178,7 +178,9 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
                 }
             }
         }
-        [result addObject:_cachedCluster];
+        if (_cachedCluster) {
+            [result addObject:_cachedCluster];
+        }
     }
     return result;
 }
