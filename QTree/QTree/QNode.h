@@ -26,5 +26,6 @@
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span;
 // Returned array is sorted from the least to the most distant
 -(NSArray*)neighboursForLocation:(CLLocationCoordinate2D)location limitCount:(NSUInteger)limit;
+- (void) clearCachedClusters;
 
 @end

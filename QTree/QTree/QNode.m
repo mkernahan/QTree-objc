@@ -142,6 +142,14 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
     }
 }
 
+- (void) clearCachedClusters {
+    self.cachedCluster = nil;
+    [_upLeft clearCachedClusters];
+    [_upRight clearCachedClusters];
+    [_downLeft clearCachedClusters];
+    [_downRight clearCachedClusters];
+}
+
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span
 {
     if( !MKCoordinateRegionIntersectsRegion(self.region, region) ) {
@@ -161,15 +169,16 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
         [result addObjectsFromArray:[self.downRight getObjectsInRegion:region minNonClusteredSpan:span]];
     } else {
         if( !self.cachedCluster ) {
-            
             NSArray* allChildren = [self getObjectsInRegion:self.region minNonClusteredSpan:0];
             if (allChildren && allChildren.count > 0) {
-                self.cachedCluster = [_filterController newQClusterObjectWithChildren:allChildren];
+                if (allChildren.count == 1) {
+                    return @[allChildren.firstObject];
+                } else {
+                    self.cachedCluster = [_filterController newQClusterObjectWithChildren:allChildren];
+                }
             }
         }
-        if (_cachedCluster) {
-            [result addObject:_cachedCluster];
-        }
+        [result addObject:_cachedCluster];
     }
     return result;
 }

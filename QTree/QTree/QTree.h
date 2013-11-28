@@ -14,6 +14,7 @@
 -(id)initWithFilterController:(id<QTreeFilterController>)filterController;
 
 -(void)insertObject:(id<QTreeInsertable>)insertableObject;
+- (void) clearCachedClusters;
 
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span;
 // Returned array is sorted from the least to the most distant
