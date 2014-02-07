@@ -29,6 +29,10 @@
     [self.rootNode insertObject:insertableObject];
 }
 
+- (void) clearAllNodes {
+    self.rootNode = [[QNode alloc] initWithRegion:MKCoordinateRegionForMapRect(MKMapRectWorld) filterController:_rootNode.filterController];
+}
+
 -(NSUInteger)count
 {
     return self.rootNode.count;

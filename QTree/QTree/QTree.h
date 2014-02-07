@@ -14,6 +14,8 @@
 -(id)initWithFilterController:(id<QTreeFilterController>)filterController;
 
 -(void)insertObject:(id<QTreeInsertable>)insertableObject;
+- (void) clearAllNodes;
+
 - (void) clearCachedClusters;
 
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span;
