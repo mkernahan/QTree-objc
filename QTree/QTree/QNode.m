@@ -21,12 +21,12 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
 
 @property(nonatomic, strong) QCluster* cachedCluster;
 
-@property(nonatomic, retain) QNode* upLeft;
-@property(nonatomic, retain) QNode* upRight;
-@property(nonatomic, retain) QNode* downLeft;
-@property(nonatomic, retain) QNode* downRight;
+@property(nonatomic, strong) QNode* upLeft;
+@property(nonatomic, strong) QNode* upRight;
+@property(nonatomic, strong) QNode* downLeft;
+@property(nonatomic, strong) QNode* downRight;
 
-@property(nonatomic, assign) id<QTreeFilterController> filterController;
+@property(nonatomic, weak) id<QTreeFilterController> filterController;
 @end
 
 @implementation QNode
