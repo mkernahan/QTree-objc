@@ -142,14 +142,6 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
     }
 }
 
-- (void) clearCachedClusters {
-    self.cachedCluster = nil;
-    [_upLeft clearCachedClusters];
-    [_upRight clearCachedClusters];
-    [_downLeft clearCachedClusters];
-    [_downRight clearCachedClusters];
-}
-
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span
 {
     if( !MKCoordinateRegionIntersectsRegion(self.region, region) ) {

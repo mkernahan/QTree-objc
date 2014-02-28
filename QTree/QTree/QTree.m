@@ -38,10 +38,6 @@
     return self.rootNode.count;
 }
 
-- (void) clearCachedClusters {
-    [_rootNode clearCachedClusters];
-}
-
 -(NSArray*)getObjectsInRegion:(MKCoordinateRegion)region minNonClusteredSpan:(CLLocationDegrees)span
 {
 	return [self.rootNode getObjectsInRegion:region minNonClusteredSpan:span];
