@@ -160,7 +160,7 @@ static const CLLocationDistance MinDistinguishableMetersDistance = 0.5;
         if( MKCoordinateRegionContainsCoordinate(region, self.leadObject.coordinate) ) {
             [result addObject:self.leadObject];
             [result addObjectsFromArray:self.satellites.allObjects];
-            return (_filterController ? [_filterController applyFilterToArrayOfInsertableObjects:result] : result);
+            return result;
         }
     } else if( MIN(self.region.span.latitudeDelta, self.region.span.longitudeDelta) >= span ) {
         [result addObjectsFromArray:[self.upLeft getObjectsInRegion:region minNonClusteredSpan:span]];
